@@ -8,7 +8,7 @@ spec:
   applicationName: libertydiag
   expose: true
   pullPolicy: IfNotPresent
-  replicas: 1
+  replicas: 2
   resources: {}
   service:
     port: 9080
