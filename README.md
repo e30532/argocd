@@ -64,13 +64,64 @@ yamayoshi@yamadayoshikis-MacBook-Pro ~ %
 
 11. % oc config set-context --current --namespace=argocd
 
-12. deploy a liberty operator application.
+12. install open liberty operator
+
+13. deploy a liberty operator application via argocd.
 ```
 % argocd app create myola --repo https://github.com/e30532/argocd.git --path ola --dest-server https://kubernetes.default.svc --dest-namespace default
 application 'myola' created
 ```
 
-https://localhost:8080
+14. sync the app
+```
+% argocd app sync myola      
+
+Name:               argocd/myola
+Project:            default
+Server:             https://kubernetes.default.svc
+Namespace:          default
+URL:                https://localhost:8080/applications/myola
+Repo:               https://github.com/e30532/argocd.git
+Target:             
+Path:               ola
+SyncWindow:         Sync Allowed
+Sync Policy:        <none>
+Sync Status:        Synced to  (9e81421)
+Health Status:      Healthy
+
+Operation:          Sync
+Sync Revision:      9e81421a27979217da8b993a4d95af1709b40ba8
+Phase:              Succeeded
+Start:              2023-03-29 00:34:11 +0900 JST
+Finished:           2023-03-29 00:34:13 +0900 JST
+Duration:           2s
+Message:            successfully synced (all tasks run)
+
+GROUP                KIND                    NAMESPACE  NAME         STATUS  HEALTH  HOOK  MESSAGE
+apps.openliberty.io  OpenLibertyApplication  default    libertydiag  Synced                openlibertyapplication.apps.openliberty.io/libertydiag created
+```
+
+15. check the app in arg CD console(https://localhost:8080)
+
+<img width="1490" alt="image" src="https://user-images.githubusercontent.com/22098113/228290838-2ec0cae1-5194-4b63-ad85-595c404a44c8.png">
+
+16. check the corresponding OCP object
+
+```
+% oc get OpenLibertyApplications -n default
+NAME          IMAGE                     EXPOSED   RECONCILED   AGE
+libertydiag   quay.io/ibm/libertydiag   true      True         2m48s
+% oc get deployment -n default             
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+libertydiag   1/1     1            1           2m48s
+% oc get pod -n default                    
+NAME                           READY   STATUS    RESTARTS   AGE
+libertydiag-6bc8487d5d-bxb29   1/1     Running   0          2m51s
+% 
+
+
+```
+
 
 
 
