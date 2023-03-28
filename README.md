@@ -64,7 +64,13 @@ yamayoshi@yamadayoshikis-MacBook-Pro ~ %
 
 11. % oc config set-context --current --namespace=argocd
 
+12. deploy a liberty operator application.
+```
+% argocd app create myola --repo https://github.com/e30532/argocd.git --path ola --dest-server https://kubernetes.default.svc --dest-namespace default
+application 'myola' created
+```
 
+https://localhost:8080
 
 
 
