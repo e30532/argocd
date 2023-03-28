@@ -117,13 +117,27 @@ libertydiag   1/1     1            1           2m48s
 % oc get pod -n default                    
 NAME                           READY   STATUS    RESTARTS   AGE
 libertydiag-6bc8487d5d-bxb29   1/1     Running   0          2m51s
-% 
+```
 
+17. If we update the applicate state in the github repository and sync the application, the state of OCP objects is also updated 
+<img width="411" alt="image" src="https://user-images.githubusercontent.com/22098113/228292003-6fe94869-ddfc-43c5-93fd-2d5b11683d14.png">
 
+<img width="1255" alt="image" src="https://user-images.githubusercontent.com/22098113/228292242-c16fc9d0-4e19-43a0-9544-71ba02b95a91.png">
+
+```
+% oc get pod -n default
+NAME                           READY   STATUS    RESTARTS   AGE
+libertydiag-6bc8487d5d-bxb29   1/1     Running   0          6m27s
+libertydiag-6bc8487d5d-h5hcq   1/1     Running   0          2m3s
 ```
 
 
+Conculsion: 
+By using Argo CD, we can controle the application definition in Github. 
+
+<img width="692" alt="image" src="https://user-images.githubusercontent.com/22098113/228293205-c139b99b-5004-4482-bbd9-5c64890e8b62.png">
 
 
 Reference:
 https://argo-cd.readthedocs.io/en/stable/getting_started/
+
